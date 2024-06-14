@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import classes from "./MainNavigation.module.css";
+import classes from "./MainNavigation.module.css"; //CSS Module for scoping
 
 const MainNavigation = () => {
   return (
