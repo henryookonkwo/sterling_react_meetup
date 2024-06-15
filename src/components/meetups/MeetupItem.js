@@ -13,8 +13,8 @@ const MeetupItem = (props) => {
           <address>{props.address}</address>
           <p>{props.description}</p>
         </div>
-        <div>
-          <button className={classes.actions}>To Favorites</button>
+        <div className={classes.actions}>
+          <button>To Favorites</button>
         </div>
       </Card>
     </li>
