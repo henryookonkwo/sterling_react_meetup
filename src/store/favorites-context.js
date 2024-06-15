@@ -7,6 +7,21 @@ const FavoritesContext = createContext({
 
 const FavoritesContextProvider = (props) => {
   const [userFavorites, setUserFavorites] = useState();
+
+  const addFavoriteHandler = (favoriteMeetup) => {
+    //since we depend on a previous version of the state, we need to use this method to make sure react gets the last item
+    setUserFavorites((prevUserFavorites) => {
+      return prevUserFavorites.concat(favoriteMeetup);
+    });
+  };
+  const removeFavoriteHandler = (meetupId) => {
+    setUserFavorites((prevUserFavorites) => {
+      return prevUserFavorites.filter((meetup) => meetup.id !== meetupId);
+    });
+  };
+  const itemIsFavoriteHandler = (meetupId) => {
+    return userFavorites.some((meetup) => meetup.id === meetupId);
+  };
   const context = {
     favorites: userFavorites,
     totalFavorites: userFavorites.length,
