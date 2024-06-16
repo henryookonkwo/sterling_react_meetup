@@ -3,10 +3,13 @@ import { createContext, useState } from "react";
 const FavoritesContext = createContext({
   favorites: [],
   totalFavorites: 0,
+  addFavorite: (favoriteMeetup) => {},
+  removeFavorite: (meetupId) => {},
+  itemIsFavorite: (meetupId) => {},
 });
 
-const FavoritesContextProvider = (props) => {
-  const [userFavorites, setUserFavorites] = useState();
+export const FavoritesContextProvider = (props) => {
+  const [userFavorites, setUserFavorites] = useState([]);
 
   const addFavoriteHandler = (favoriteMeetup) => {
     //since we depend on a previous version of the state, we need to use this method to make sure react gets the last item
@@ -25,6 +28,9 @@ const FavoritesContextProvider = (props) => {
   const context = {
     favorites: userFavorites,
     totalFavorites: userFavorites.length,
+    addFavorite: addFavoriteHandler,
+    removeFavorite: removeFavoriteHandler,
+    itemIsFavorite: itemIsFavoriteHandler,
   };
   return (
     <FavoritesContext.Provider value={context}>
@@ -32,3 +38,5 @@ const FavoritesContextProvider = (props) => {
     </FavoritesContext.Provider>
   );
 };
+
+export default FavoritesContext;

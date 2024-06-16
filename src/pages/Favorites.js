@@ -1,4 +1,4 @@
-const FavoritesPage = () => {
+const FavoritesPage = (props) => {
   return (
     <section>
       <h1>Favorites page</h1>
