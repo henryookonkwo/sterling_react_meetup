@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 
 const FavoritesContext = createContext({
   favorites: [],
@@ -10,6 +10,17 @@ const FavoritesContext = createContext({
 
 export const FavoritesContextProvider = (props) => {
   const [userFavorites, setUserFavorites] = useState([]);
+
+  useEffect(() => {
+    const storedFavorites = JSON.parse(localStorage.getItem("favorites"));
+    if (storedFavorites) {
+      setUserFavorites(storedFavorites);
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("favorites", JSON.stringify(userFavorites));
+  }, [userFavorites]);
 
   const addFavoriteHandler = (favoriteMeetup) => {
     //since we depend on a previous version of the state, we need to use this method to make sure react gets the last item
